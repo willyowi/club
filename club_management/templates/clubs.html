@@ -1,0 +1,56 @@
+<!-- To see all the registered clubs/ -->
+{% extends 'index.html'%}
+{% load bootstrap3 %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Registered Clubs</title>
+</head>
+<body>
+    {% block content %}
+    <div class="row card-body card-fluid"  style="width:auto; padding-left:12em;">
+
+            <div class="col-md-1"></div>
+        
+                <div class="col-md-10">
+                    <table class=" table table-bordered table-striped">
+                        <thead>
+                            <tr style="background-color:#9CC4DD;">
+                                <th>Institution</th>
+                                <th>Club</th>
+                            
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for detail in details %}
+        
+                            <tr>
+                                <td>{{detail.id}}</td>
+                                <td>{{detail.Club_name}}</td>
+                                <td>{{detail.Institution}}</td>
+                                <!-- <td>{{detail.Phone_number}}</td>
+                                <td>{{detail.get_Industry_values}}
+          
+                                </td>
+                                <td>{{detail.Revstreams}}</td>
+                                <td>{{detail.Physical_address}}</td>
+                                <td>{{detail.Town}}</td>
+                                <td>{{detail.join_date}}</td> -->
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="col-md-1"></div>
+                </div>
+            </div>
+        
+
+
+    {% endblock %}
+    
+</body>
+</html>

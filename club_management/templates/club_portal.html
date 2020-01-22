@@ -1,0 +1,72 @@
+<!-- should not be there -->
+{% extends "clubs/base.html" %}
+{% load bootstrap3 %} 
+{% bootstrap_css %} {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %} {# Embed Bootstrap JS+jQuery #}
+{% block content %}
+
+
+<nav class="navbar bg-light navbar-expand-lg navbar-light  shadow-sm">
+    <img width="10%" class="navbar-brand" src="https://brainversetechnologies.co.ke/wp-content/uploads/2017/07/Logo-Transparent-e1499460449783.png ">
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a style="color: #000;" class="nav-link " href="{% url 'Index'%}">Home<span
+                        class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a style="color: #000;" class="nav-link " href="">Members<span
+                        class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a style="color: #000;" class="nav-link " href="">Officials<span
+                        class="sr-only">(current)</span></a>
+            </li>
+          
+        
+            
+            {% if user.is_authenticated %}
+
+        
+            <li><a style="color: #000;" class='nav-link' href="/logout">Logout</a>
+
+            </li>
+        
+
+            {% else %}
+            <li>
+                <a style="color: #000;" class='nav-link' href="/accounts/login">Login</a>
+            </li>
+            {% endif %}
+        </ul>
+        
+
+    </div>
+</nav>
+<div class="col-md-2"></div>
+<div class="col-md-8" >  
+    <h1>Club Portal</h1>
+    <button> <a href="{% url 'new-official' %}">Add official</a> </button>
+    <button> <a href="{% url 'new-member' %}">Add Member</a> </button>
+</div>
+
+
+<!-- <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"> -->
+<link href="//cdn.bootcss.com/bootstrap-datetimepicker/4.17.44/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+<script src="//cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script>
+<!-- <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+<!-- <script src="//cdn.bootcss.com/moment.js/2.17.1/moment.min.js"></script> -->
+<!-- <script src="//cdn.bootcss.com/bootstrap-datetimepicker/4.17.44/js/bootstrap-datetimepicker.min.js"></script> -->
+
+
+{% bootstrap_javascript %}
+
+
+
+
+{% endblock %}
