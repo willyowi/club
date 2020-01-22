@@ -3,17 +3,26 @@ from django.contrib.auth.models import User
 # from django import forms
 
 # Create your models here.
-class Institution(models.Model):
-    STATUS_CHOICES = ((1, 'Brainverse Institute'),(2, 'Brainverse Technologies'))
-    # Institution = forms.ChoiceField(choices = STATUS_CHOICES) 
+# class Institution(models.Model):
+#     STATUS_CHOICES = ((1, 'Brainverse Institute'),(2, 'Brainverse Technologies'))
+#     # Institution = forms.ChoiceField(choices = STATUS_CHOICES) 
+INSTITUTION_CHOICES = ( 
+    ("1", "--Select--"), 
 
+    ("2", "Brainverse Institute"), 
+    ("3", "Brain verse college"), 
+    ("4", "Brain Technical")
+) 
+  
 
 class Club(models.Model):
-    institution= models.ForeignKey(Institution,on_delete=models.CASCADE,default=None)
+    # institution= models.ForeignKey(Institution,on_delete=models.CASCADE,default=None)
     club_name = models.CharField(max_length=100)
     club_email = models.EmailField(max_length=50)
     club_contact =models.CharField(max_length=20)
     registered_on = models.DateField(auto_now_add=True)
+    institution = models.CharField( max_length=200,choices = INSTITUTION_CHOICES, default=1  )
+
 
     def __str__(self):
         return self.club_name

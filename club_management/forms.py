@@ -4,13 +4,6 @@ from django.contrib.auth.models import User
 
 
 class ClubForm(forms.ModelForm):
-    CHOICES = (
-         (
-            (11, 'Brainverse Institute'),
-            (12, 'Brainverse Collage'),
-            (13, 'B4AU'),
-        ))
-    institution = forms.ChoiceField(choices=CHOICES)
 
 
     class Meta:

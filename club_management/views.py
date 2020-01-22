@@ -25,6 +25,11 @@ def login(request):
 
     # home page
 
+@login_required(login_url='register')
+def logout_view(request):
+    logout(request)
+    return redirect('login')
+
 def index(request):
     current_user=request.user
     # if current_user.is_superuser==True:
