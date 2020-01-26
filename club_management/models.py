@@ -29,7 +29,7 @@ class Club(models.Model):
     def save_club(self):
         self.save()
 class Official(models.Model):
-    club = models.ForeignKey(Club,on_delete=models.CASCADE,default=None)
+    club_name = models.ForeignKey(Club,on_delete=models.CASCADE,default=None)
     official_name = models.CharField( blank=False, max_length=50)
     position = models.CharField(blank=False, max_length=50)
     leadership_year = models.CharField(blank=False, max_length=50)
@@ -42,11 +42,15 @@ class Official(models.Model):
         self.save()
 
 class Member(models.Model):
+    club = models.ForeignKey(Club,on_delete=models.CASCADE,default=None)
     member_name = models.CharField( blank=False, max_length=50)
     academic_year = models.CharField(blank=False, max_length=50)
     registration_number = models.CharField(blank=False, max_length=50)
     phone = models.CharField(blank=False, max_length=50)
     school_or_faculty = models.CharField(blank=False, max_length=50)
     email = models.EmailField(max_length=50)
+
+    def save_member(self):
+        self.save()
     
 

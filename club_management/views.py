@@ -52,11 +52,15 @@ def club_portal(request):
 
 @login_required(login_url='/accounts/login/')
 def clubs(request):
-    for detail in details:
-        Institution = detail.get('instituion')
-        Club_name = detail.get('club_name')
+    details = Club.objects.all()
+
+    return render(request,'clubs.html',{'details':details})
+    # for detail in details:
+    
+    #     Institution = detail.get('instituion')
+    #     Club_name = detail.get('club_name')
         
-    return render(request, 'clubs.html', {'details': details})
+    # return render(request, 'clubs.html', )
 
 
 
@@ -69,7 +73,7 @@ def new_club(request):
             club = form.save(commit=False)
             club.save()
 
-            institution =form.CHOICES.get('institution')
+            institution =form.cleaned_data.get('institution')
 
             name = form.cleaned_data.get('club_name')
             email = form.cleaned_data.get('club_email')
@@ -78,7 +82,7 @@ def new_club(request):
         
 
 
-        return HttpResponseRedirect('/index')
+        return HttpResponseRedirect('/clubs')
 
     else:
         form = ClubForm()
@@ -86,7 +90,11 @@ def new_club(request):
     return render(request, 'register_club.html', {"form": form})
 
 
+@login_required(login_url='/accounts/login/')
+def officials(request):
+    details = Official.objects.all()
 
+    return render(request,'officials.html',{'details':details})
 
 @login_required(login_url='/accounts/login/')
 def new_official(request):
@@ -104,7 +112,7 @@ def new_official(request):
         
 
 
-        return HttpResponseRedirect('/index')
+        return HttpResponseRedirect('/officials')
 
     else:
         form = OfficialForm()

@@ -1,0 +1,53 @@
+{% extends clubs/base.html %}
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>New Official</title>
+</head>
+<body>
+    {% block content %}
+
+    <div>
+        <p>The following  leader has been added to  be an official</p>
+
+        <table class=" table table-bordered table-striped">
+                <thead>
+                    <tr style="background-color:#9CC4DD;">
+                        <th></th>
+                        <th>Name</th>
+                        <th>Club</th>
+                        <th>Position</th>
+                        
+
+                    
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for detail in details %} 
+                    
+
+                    <tr>
+                        <td>{{detail.id}}  </td>
+                        
+                        <td>{{detail.official_name}}</td>
+                        
+
+                        <td>{{detail.position}}</td>
+                        
+                        
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+    </div>
+
+
+    {% endblock %}
+    
+</body>
+</html>
