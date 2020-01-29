@@ -9,6 +9,7 @@ import requests
 # Create your views here.
 def welcome(request):
     return HttpResponse('Welcome to the Club Managemnet')
+    
 def login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)

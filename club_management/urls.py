@@ -10,9 +10,4 @@ urlpatterns=[
     url(r'^new/official/$', views.new_official, name='new-official'),
     url(r'^clubs/$',views.clubs,name='clubs'),
     url(r'^officials/$',views.officials,name='officials'),
-
-
-
-
-
 ]
