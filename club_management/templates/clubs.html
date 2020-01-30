@@ -3,54 +3,34 @@
 {% load bootstrap4 %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Registered Clubs</title>
-</head>
-<body>
     {% block content %}
-    <div class="row card-body card-fluid"  style="width:auto; padding-left:12em;">
+    
+    <table class=" table table-bordered table-striped">
+        <thead>
+            <tr style="background-color:#9CC4DD;">
+                <th>#</th>
+                <th>Club</th>
+                <th>Institution</th>
+            
+            </tr>
+        </thead>
+        <tbody>
+            {% for detail in details %} 
+            
 
-            <div class="col-md-1"></div>
-        
-                <div class="col-md-10">
-                    <table class=" table table-bordered table-striped">
-                        <thead>
-                            <tr style="background-color:#9CC4DD;">
-                                <th>Number</th>
-                                <th>Club</th>
-                                <th>Institution</th>
-                            
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for detail in details %} 
-                            
-        
-                            <tr>
-                                <td>{{detail.id}}  </td>
-                                
-                                <td>{{detail.club_name}}</td>
-                                
+            <tr>
+                <td>{{detail.id}}  </td>
+                
+                <td>{{detail.club_name}}</td>
+                
 
-                                <td>{{detail.institution}}</td>
-                                
-                                
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                    <div class="col-md-1"></div>
-                </div>
-            </div>
-        
+                <td>{{detail.institution}}</td>
+                
+                
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
 
     {% endblock %}
-    
-</body>
-</html>

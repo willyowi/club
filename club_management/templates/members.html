@@ -1,0 +1,44 @@
+{% extends 'clubs/base.html'%}
+{% load bootstrap4 %}
+{% load static %}
+    {% block content %}
+   
+
+           
+               
+        <p>The following are the members</p>
+        <table class=" table table-bordered table-striped">
+            <thead>
+                <tr style="background-color:#9CC4DD;">
+                    <th></th>
+                    <th>Name</th>
+                    <th>Club</th>
+                    <th>Position</th>
+                
+                </tr>
+            </thead>
+            <tbody>
+                {% for detail in details %} 
+                
+
+                <tr>
+                    <td>{{detail.id}}  </td>
+                    
+                    <td>{{detail.member_name}}</td>
+                    
+
+                    <td>{{detail.club}}</td>
+                    <td>{{detail.position}}</td>
+                    
+                    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+
+
+
+
+
+    {% endblock %}

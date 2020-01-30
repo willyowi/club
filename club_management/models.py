@@ -1,11 +1,28 @@
 from django.db import models
 from django.contrib.auth.models import User
+from .managers import CustomUserManager
+from django.contrib.auth.models import AbstractUser
+from django.utils.translation import ugettext_lazy as _
 # from django import forms
 
 # Create your models here.
 # class Institution(models.Model):
 #     STATUS_CHOICES = ((1, 'Brainverse Institute'),(2, 'Brainverse Technologies'))
 #     # Institution = forms.ChoiceField(choices = STATUS_CHOICES) 
+
+
+class CustomUser(AbstractUser):
+    username = None
+    email = models.EmailField(_('email address'), unique = True)
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+
+    objects = CustomUserManager()
+
+    def __str__(self):
+        return self.email
+
+
 INSTITUTION_CHOICES = ( 
     ("1", "--Select--"), 
 
@@ -21,13 +38,16 @@ class Club(models.Model):
     club_email = models.EmailField(max_length=50)
     club_contact =models.CharField(max_length=20)
     registered_on = models.DateField(auto_now_add=True)
-    institution = models.CharField( max_length=200,choices = INSTITUTION_CHOICES, default=1  )
+    institution = models.CharField( max_length=200,choices = INSTITUTION_CHOICES, default=1)
+    owner =models.ForeignKey(CustomUser,on_delete=models.CASCADE,null=True)
 
 
     def __str__(self):
         return self.club_name
+
     def save_club(self):
         self.save()
+
 class Official(models.Model):
     club_name = models.ForeignKey(Club,on_delete=models.CASCADE,default=None)
     official_name = models.CharField( blank=False, max_length=50)

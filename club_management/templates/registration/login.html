@@ -1,46 +1,25 @@
 {%extends "registration/base.html"%}
 {% load bootstrap4 %}
+
 {% block content %}
 
-<div class="container" >
-        <div class="row sign-up top-margin">
-          <div class="col-md-1">
-            <!-- Empty div -->
-          </div>
-          <div class="col-md-4">
-    
-            <div class="logoname" style="display:inline">
-             </div>
-    
-          </div>
-            <div class="col-md-4">
-                {% if form.errors %}
-                <p class="small">Password or Username is incorrect</p>
-                {% endif %}
-                <div class="section">
-                    <div class="mylogo">
-                    </div>
-                    <div class="form-section" id="login" style="background-color: black" >
-                        <form action="/accounts/login/" method="POST" style="color: white">
-                            {% csrf_token %}
-                            {% bootstrap_form form %}
-                            <div class="form-group">
-                                <input type="submit" class="btn btn-primary btn-sm" value="Log in">
-                            </div>
-                            <input type="hidden" name="next" value="/">
-                        </form>
-                    </div>
-    
-                    <p class="forgot" style="color: black">Forgot Password?</p>
-                </div>
-                <div class="section" style="color: black">
-                  <p>Don't have an account? <a href="/accounts/register/" class="btn btn-default">Sign Up</a></p>
-                  
-    
-    
-                    <!-- <p class="forgot">Don't have an account? <a href="/signup/">Sign-Up</a></p> -->
-                </div>
+<div class="content-section">
+    <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Club-Manangement System Login</legend>
+                {% bootstrap_form form %}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Sign In</button>
             </div>
-        </div>
+    </form>
+    <div class="border-top pt-3">
+        <small class="text-muted">Dont have an account?
+            <a href="/accounts/register/" class="ml-2">Register</a>
+        </small>
     </div>
-{% endblock %}
+</div>
+
+{% endblock%}
+

@@ -1,0 +1,26 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+    <div class="container">
+      <a class="navbar-brand mr-4" href="{% url 'Index'%}">
+          <img  style="width:30px;" class="navbar-brand" src="https://brainversetechnologies.co.ke/wp-content/uploads/2017/07/Logo-Transparent-e1499460449783.png " alt="">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarToggle">
+        <div class="navbar-nav mr-auto">
+          <a class="nav-item nav-link" href="{% url 'Index'%}">Home</a>
+          
+        </div>
+        <!-- Navbar Right Side -->
+        <div class="navbar-nav">
+          {% if user.is_authenticated %}
+          <a class="nav-item nav-link" href="#">{{user.email}}</a>
+          <a class="nav-item nav-link" href="/accounts/login">Logout</a>
+          {% else %}
+          <a class="nav-item nav-link" href="/accounts/login">Login</a>
+          <a class="nav-item nav-link" href="/accounts/register">Register</a> 
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </nav>
