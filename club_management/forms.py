@@ -6,10 +6,12 @@ from .models import CustomUser
 
 
 class ClubForm(forms.ModelForm):
-
+    '''
+    form to create a club
+    '''
     class Meta:
         model = Club
-        fields = '__all__'
+        exclude=['owner']
 
 class OfficialForm(forms.ModelForm):
     

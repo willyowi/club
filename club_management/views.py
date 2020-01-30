@@ -52,7 +52,7 @@ def clubs(request):
     '''
     view that renders all clubs
     '''
-    
+
     details = Club.objects.all()
 
     return render(request,'clubs.html',{'details':details})
@@ -75,6 +75,7 @@ def new_club(request):
         form = ClubForm(request.POST, request.FILES)
         if form.is_valid():
             club = form.save(commit=False)
+            club.owner=current_user
             club.save()
 
             institution =form.cleaned_data.get('institution')
