@@ -1,69 +1,13 @@
-<!-- home page/landing page -->
-
-{% load static %}
+{% extends "clubs/base.html" %}
 {% load bootstrap4 %}
-<!DOCTYPE html>
-<html>
-<meta charset="utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
-    name='viewport' />
-
-<head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="{%static 'assets/css/material-dashboard.css?v=2.1.1'%}">
-    <!--     Fonts and icons     -->
-    <link rel="stylesheet" type="text/css"
-        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-
-    <link href="{% static 'assets/demo/demo.css'%}" rel="stylesheet" />
-    <link rel="stylesheet" href="{% static 'assets/css/material-dashboard.css?v=2.1.1' %}">
-</head>
-<nav class="navbar bg-light navbar-expand-lg navbar-light  shadow-sm">
-        <img width="10%" class="navbar-brand" src="https://brainversetechnologies.co.ke/wp-content/uploads/2017/07/Logo-Transparent-e1499460449783.png ">
-    
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a style="color: #000;" class="nav-link " href="{% url 'Index'%}">Home<span
-                            class="sr-only">(current)</span></a>
-                </li>
-            
-                
-                {% if user.is_authenticated %}
-    
-                <li>
-                <li><a style="color: #000;" class='nav-link' href="/logout">Logout</a>
-    
-                </li>
-                </li>
-    
-                {% else %}
-                <li>
-                    <a style="color: #000;" class='nav-link' href="/accounts/login">Login</a>
-                </li>
-                {% endif %}
-            </ul>
-            
-    
-        </div>
-    </nav>
-<body>
-   <h3 style="align-content: center" >Welcome To Brainverse Clubs Management </h3>
+{% block content %}
+        <h3 style="align-content: center" >Welcome To Brainverse Clubs Management </h3>
     
  
-   <button><a class="dropdown-item" href="{% url 'new-club' %}">Register  club</a></button>
-    <button class="danger" ><a class="dropdown-item" href="{% url 'Index-Portal' %}">Login to club Portal</a></button><br>
-    <br>
-    <br>
-    <button class="danger" ><a class="dropdown-item" href="{% url 'clubs' %}">All clubs</a></button><br>
-
-</body>
-</html>
+        <button><a class="dropdown-item" href="{% url 'new-club' %}">Register  club</a></button>
+         <button class="danger" ><a class="dropdown-item" href="{% url 'Index-Portal' %}">Login to club Portal</a></button><br>
+         <br>
+         <br>
+         <button class="danger" ><a class="dropdown-item" href="{% url 'clubs' %}">All clubs</a></button><br>
+ {% endblock %}
