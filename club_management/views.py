@@ -9,7 +9,7 @@ import requests
 # Create your views here.
 def welcome(request):
     return HttpResponse('Welcome to the Club Managemnet')
-    
+
 def login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -45,10 +45,9 @@ def index(request):
 
 @login_required(login_url='/accounts/login/')
 def club_portal(request):
-         current_user=request.user
-  
 
-         return render(request, 'club_portal.html')
+    current_user=request.user
+    return render(request, 'club_portal.html')
 
 
 @login_required(login_url='/accounts/login/')
