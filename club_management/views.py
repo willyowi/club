@@ -104,9 +104,14 @@ def officials(request):
     '''
     view to render officials of a giveb club
     '''
-    details = Official.objects.all()
+    current_user = request.user
+    # get club instance from logged in user
+    club = Club.objects.filter(owner=current_user).first()
 
-    return render(request,'officials.html',{'details':details})
+    # fetch all officials belonging to that club alone
+    details = Official.objects.filter(club_name=club).all()
+
+    return render(request,'officials.html',{'details':details,'title':'Club Officials'})
 
 
 @login_required(login_url='/accounts/login/')

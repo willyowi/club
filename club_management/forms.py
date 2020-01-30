@@ -17,7 +17,8 @@ class OfficialForm(forms.ModelForm):
     
     class Meta:
         model = Official
-        fields = '__all__'
+        exclude=['club_name']
+
 
 class MemberForm(forms.ModelForm):
     class Meta:
