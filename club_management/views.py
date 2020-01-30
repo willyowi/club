@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse,Http404,HttpResponseRedirect
 from  club_management.forms import *
+from .models import *
 
 from django.http  import HttpResponse
 import requests
@@ -30,21 +31,24 @@ def logout_view(request):
 
 def index(request):
     current_user=request.user
-    # if current_user.is_superuser==True:
 
-    #     print(current_user.is_superuser,"Admiiiiin")
+    # fetch club associated with the curent logged in user
+    club=Club.objects.filter(owner=current_user).first()
 
-    #     return redirect(jamboAdmin_views.home)
-    # else:
-
-    return render(request, 'index.html')
+    return render(request, 'index.html',{'club':club})
 
 
 @login_required(login_url='/accounts/login/')
-def club_portal(request):
-
+def club_portal(request,club_name):
+    '''
+    view that redirects a person to their club
+    params: pk of user the user,club name
+    will need a custom decorator to prevent rogue access if you know a club name
+    '''
     current_user=request.user
-    return render(request, 'club_portal.html')
+    # redirect user to their club
+
+    return render(request, 'club_portal.html',{'club':club_name})
 
 
 @login_required(login_url='/accounts/login/')
@@ -69,8 +73,10 @@ def clubs(request):
 def new_club(request):
     '''
     view to create a club
+   
     '''
     current_user = request.user
+
     if request.method == "POST":
         form = ClubForm(request.POST, request.FILES)
         if form.is_valid():
@@ -95,6 +101,9 @@ def new_club(request):
 
 @login_required(login_url='/accounts/login/')
 def officials(request):
+    '''
+    view to render officials of a giveb club
+    '''
     details = Official.objects.all()
 
     return render(request,'officials.html',{'details':details})
@@ -102,17 +111,24 @@ def officials(request):
 
 @login_required(login_url='/accounts/login/')
 def new_official(request):
+    '''
+    view to add an official
+    '''
     current_user = request.user
+    # get club instance associated by the current_user
+    club = Club.objects.filter(owner=current_user).first()
+
     if request.method == "POST":
         form = OfficialForm(request.POST, request.FILES)
         if form.is_valid():
             official = form.save(commit=False)
+            # binding an official to a given club
+            official.club_name = club
             official.save()
 
             name = form.cleaned_data.get('official_name')
             position = form.cleaned_data.get('position')
             year = form.cleaned_data.get('leadership_year')
-
 
         return HttpResponseRedirect('/officials')
 
