@@ -38,7 +38,8 @@ class Club(models.Model):
     club_email = models.EmailField(max_length=50)
     club_contact =models.CharField(max_length=20)
     registered_on = models.DateField(auto_now_add=True)
-    institution = models.CharField( max_length=200,choices = INSTITUTION_CHOICES, default=1  )
+    institution = models.CharField( max_length=200,choices = INSTITUTION_CHOICES, default=1)
+    owner =models.ForeignKey(CustomUser,on_delete=models.CASCADE,null=True)
 
 
     def __str__(self):

@@ -22,9 +22,6 @@ def login(request):
 
     return render(request, 'registration/login.html', {'form': form})
 
-    # logoutcode here
-
-    # home page
 
 @login_required(login_url='register')
 def logout_view(request):
@@ -52,6 +49,10 @@ def club_portal(request):
 
 @login_required(login_url='/accounts/login/')
 def clubs(request):
+    '''
+    view that renders all clubs
+    '''
+    
     details = Club.objects.all()
 
     return render(request,'clubs.html',{'details':details})
@@ -66,6 +67,9 @@ def clubs(request):
 
 @login_required(login_url='/accounts/login/')
 def new_club(request):
+    '''
+    view to create a club
+    '''
     current_user = request.user
     if request.method == "POST":
         form = ClubForm(request.POST, request.FILES)
@@ -79,14 +83,12 @@ def new_club(request):
             email = form.cleaned_data.get('club_email')
             contact = form.cleaned_data.get('club_contact')
 
-        
-
-
+        # redirects to club view function to render clubs
         return HttpResponseRedirect('/clubs')
 
     else:
         form = ClubForm()
-
+    
     return render(request, 'register_club.html', {"form": form})
 
 
@@ -95,6 +97,7 @@ def officials(request):
     details = Official.objects.all()
 
     return render(request,'officials.html',{'details':details})
+
 
 @login_required(login_url='/accounts/login/')
 def new_official(request):
@@ -108,8 +111,6 @@ def new_official(request):
             name = form.cleaned_data.get('official_name')
             position = form.cleaned_data.get('position')
             year = form.cleaned_data.get('leadership_year')
-
-        
 
 
         return HttpResponseRedirect('/officials')
