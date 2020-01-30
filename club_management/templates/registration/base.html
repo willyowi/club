@@ -32,12 +32,15 @@
         <div class="collapse navbar-collapse" id="navbarToggle">
           <div class="navbar-nav mr-auto">
             <a class="nav-item nav-link" href="#">Home</a>
-            <a class="nav-item nav-link" href="#">About</a>
+            <a class="nav-item nav-link" href="#">tbd</a>
           </div>
           <!-- Navbar Right Side -->
+          {% if current_user.is_a %}
+          
+          {% endif %}
           <div class="navbar-nav">
-            <a class="nav-item nav-link" href="#">Login</a>
-            <a class="nav-item nav-link" href="#">Register</a>
+            <a class="nav-item nav-link" href="/accounts/login">Login</a>
+            <a class="nav-item nav-link" href="/accounts/register">Register</a>
           </div>
         </div>
       </div>
@@ -45,10 +48,11 @@
   </header>
   <main role="main" class="container">
     <div class="row">
+      <div class="col-md-2"></div>
       <div class="col-md-8">
         {% block content %}{% endblock %}
       </div>
-      <div class="col-md-4"></div>
+      <div class="col-md-2"></div>
     </div>
   </main>
 
