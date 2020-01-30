@@ -29,6 +29,7 @@ def logout_view(request):
     logout(request)
     return redirect('login')
 
+@login_required(login_url='/accounts/login/')
 def index(request):
     current_user=request.user
 
@@ -145,23 +146,42 @@ def new_official(request):
 
 @login_required(login_url='/accounts/login/')
 def new_member(request):
+    '''
+    view to add a menber to a club
+    '''
     current_user = request.user
+
+    # get club instance associated by the current_user
+    club = Club.objects.filter(owner=current_user).first()
     if request.method == "POST":
         form = MemberForm(request.POST, request.FILES)
         if form.is_valid():
             member = form.save(commit=False)
+            member.club= club
             member.save()
 
             name = form.cleaned_data.get('member_name')
             academic_year = form.cleaned_data.get('academic_year')
             contact = form.cleaned_data.get('phone')
 
-        
 
-
-        return HttpResponseRedirect('/index')
+        return HttpResponseRedirect('members')
 
     else:
         form = MemberForm()
 
     return render(request, 'add_member.html', {"form": form})
+
+@login_required(login_url='/accounts/login/')
+def members(request):
+    '''
+    view to render members of a giveb club
+    '''
+    current_user = request.user
+    # get club instance from logged in user
+    club = Club.objects.filter(owner=current_user).first()
+
+    # fetch all officials belonging to that club alone
+    details = Member.objects.filter(club=club).all()
+
+    return render(request,'members.html',{'details':details,'title':'Club Members'})

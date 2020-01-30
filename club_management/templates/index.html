@@ -4,10 +4,14 @@
 {% block content %}
         <h3 style="align-content: center" >Welcome To Brainverse Clubs Management </h3>
     
- 
-        <button><a class="dropdown-item" href="{% url 'new-club' %}">Register  club</a></button>
-         <button class="danger" ><a class="dropdown-item" href="{% url 'Index-Portal' club.club_name %}" >Login to club Portal</a></button><br>
-         <br>
-         <br>
-         <button class="danger" ><a class="dropdown-item" href="{% url 'clubs' %}">All clubs</a></button><br>
+        {% if user.is_authenticated %}
+
+                <button><a class="dropdown-item" href="{% url 'new-club' %}">Register  club</a></button>
+                <button class="danger" ><a class="dropdown-item" href="{% url 'Index-Portal' club.club_name %}" >Login to club Portal</a></button><br>
+                <br>
+                <br>
+                <button class="danger" ><a class="dropdown-item" href="{% url 'clubs' %}">All clubs</a></button><br>
+                
+        {% endif %}
+        
  {% endblock %}

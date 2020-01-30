@@ -23,7 +23,7 @@ class OfficialForm(forms.ModelForm):
 class MemberForm(forms.ModelForm):
     class Meta:
         model = Member
-        fields = '__all__'
+        exclude=['club']
 
 
 class CustomUserCreationForm(UserCreationForm):
