@@ -11,13 +11,31 @@ import requests
 def welcome(request):
     return HttpResponse('Welcome to the Club Managemnet')
 
+# Create your views here.
+def register(request):
+    '''
+    view function for registering 
+    '''
+    if request.method=='POST':
+         form=UserRegistrationForm(request.POST)
+
+         if form.is_valid():
+             form.save()
+             username=form.cleaned_data.get('username')
+             return redirect('login')
+
+    else:
+        form=UserRegistrationForm()
+    
+    return render(request,'registration/registration_form.html',{'form':form})
+
 def login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
             user = form.save()
             auth_login(request, user)
-            return redirect('index')
+            return redirect('Index')
     else:
         form = LoginForm()
 
@@ -29,14 +47,15 @@ def logout_view(request):
     logout(request)
     return redirect('login')
 
+
 @login_required(login_url='/accounts/login/')
 def index(request):
     current_user=request.user
 
     # fetch club associated with the curent logged in user
-    club=Club.objects.filter(owner=current_user).first()
+    # club=Club.objects.filter(owner=current_user).first()
 
-    return render(request, 'index.html',{'club':club})
+    return render(request, 'index.html')
 
 
 @login_required(login_url='/accounts/login/')
