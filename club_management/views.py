@@ -53,13 +53,13 @@ def index(request):
     current_user=request.user
 
     # fetch club associated with the curent logged in user
-    # club=Club.objects.filter(owner=current_user).first()
+    club=Club.objects.filter(owner=current_user).first()
 
-    return render(request, 'index.html')
+    return render(request, 'index.html',{'club':club})
 
 
 @login_required(login_url='/accounts/login/')
-def club_portal(request,club_name):
+def club_portal(request):
     '''
     view that redirects a person to their club
     params: pk of user the user,club name
@@ -68,7 +68,12 @@ def club_portal(request,club_name):
     current_user=request.user
     # redirect user to their club
 
-    return render(request, 'club_portal.html',{'club':club_name})
+    # fetch club associated with the curent logged in user
+    
+
+    club = Club.objects.filter(owner=current_user).first() 
+        
+    return render(request, 'club_portal.html',{'club':club})
 
 
 @login_required(login_url='/accounts/login/')
