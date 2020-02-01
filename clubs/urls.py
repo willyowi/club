@@ -16,9 +16,11 @@ Including another URLconf
 from django.contrib import admin
 # from django.urls import path,include
 from django.conf.urls import url,include
+from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib.auth import views  as auth_views
+from club_management import views as club_views
 
 
 
@@ -26,6 +28,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'', include('club_management.urls')),
     url(r'^logout/$', auth_views.logout, {"next_page": '/'}),
+    path('accounts/register/',club_views.register,name='register'),
 
     # pa('admin/', admin.site.urls),
     # path('',include('club_management.urls')),

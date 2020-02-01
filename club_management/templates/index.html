@@ -6,8 +6,13 @@
     
         {% if user.is_authenticated %}
 
+                {% if club is None %}
                 <button><a class="dropdown-item" href="{% url 'new-club' %}">Register  club</a></button>
-                <button class="danger" ><a class="dropdown-item" href="{% url 'Index-Portal' club.club_name %}" >Login to club Portal</a></button><br>
+                {% else %} 
+                <button class="danger" ><a class="dropdown-item" href="{% url 'Index-Portal' %}" >Login to club Portal</a></button>    
+                
+                {% endif %}
+                <br>
                 <br>
                 <br>
                 <button class="danger" ><a class="dropdown-item" href="{% url 'clubs' %}">All clubs</a></button><br>

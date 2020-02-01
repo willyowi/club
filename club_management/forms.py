@@ -1,8 +1,8 @@
 from django import forms
 from .models import *
-from django.contrib.auth.models import User	
 from django.contrib.auth.forms import UserCreationForm,UserChangeForm
 from .models import CustomUser
+
 
 
 class ClubForm(forms.ModelForm):
@@ -24,6 +24,12 @@ class MemberForm(forms.ModelForm):
     class Meta:
         model = Member
         exclude=['club']
+
+class UserRegistrationForm(UserCreationForm):
+
+    class Meta:
+        model=CustomUser
+        fields=['email','password1','password2']        
 
 
 class CustomUserCreationForm(UserCreationForm):

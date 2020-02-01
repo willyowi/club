@@ -11,13 +11,31 @@ import requests
 def welcome(request):
     return HttpResponse('Welcome to the Club Managemnet')
 
+# Create your views here.
+def register(request):
+    '''
+    view function for registering 
+    '''
+    if request.method=='POST':
+         form=UserRegistrationForm(request.POST)
+
+         if form.is_valid():
+             form.save()
+             username=form.cleaned_data.get('username')
+             return redirect('login')
+
+    else:
+        form=UserRegistrationForm()
+    
+    return render(request,'registration/registration_form.html',{'form':form})
+
 def login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
             user = form.save()
             auth_login(request, user)
-            return redirect('index')
+            return redirect('Index')
     else:
         form = LoginForm()
 
@@ -28,6 +46,7 @@ def login(request):
 def logout_view(request):
     logout(request)
     return redirect('login')
+
 
 @login_required(login_url='/accounts/login/')
 def index(request):
@@ -40,7 +59,7 @@ def index(request):
 
 
 @login_required(login_url='/accounts/login/')
-def club_portal(request,club_name):
+def club_portal(request):
     '''
     view that redirects a person to their club
     params: pk of user the user,club name
@@ -49,7 +68,12 @@ def club_portal(request,club_name):
     current_user=request.user
     # redirect user to their club
 
-    return render(request, 'club_portal.html',{'club':club_name})
+    # fetch club associated with the curent logged in user
+    
+
+    club = Club.objects.filter(owner=current_user).first() 
+        
+    return render(request, 'club_portal.html',{'club':club})
 
 
 @login_required(login_url='/accounts/login/')
